@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace SQLHandling
 {
@@ -33,8 +34,8 @@ namespace SQLHandling
                     {
                         Customer customer = new Customer();
                         customer.CustomerId = Convert.ToInt32(reader["CustomerID"]);
-                        customer.FirstName = reader["CustomerFirstName"].ToString();
-                        customer.LastName = reader["CustomerSurname"].ToString();
+                        customer.CustomerFirstName = reader["CustomerFirstName"].ToString();
+                        customer.CustomerLastName = reader["CustomerSurname"].ToString();
                         CustomerList.Add(customer);
                     }
                 }
@@ -55,8 +56,8 @@ namespace SQLHandling
             }
             catch (Exception e)
             {
+                Log.Error($"{e}");
                 isConnected = false;
-                //ToDo Logging
             }
         }
 
