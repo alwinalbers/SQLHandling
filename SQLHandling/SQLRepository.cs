@@ -32,10 +32,5 @@ namespace SQLHandling
 
             return sqlConnection;
         }
-
-        //public void ReadData()
-        //{
-        //    command = new SqlCommand()
-        //}
     }
 }

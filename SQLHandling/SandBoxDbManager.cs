@@ -25,7 +25,6 @@ namespace SQLHandling
             List<Customer> CustomerList = new List<Customer>();
             string sql = "SELECT * FROM Customer";
 
-            Connect();
             using (SqlCommand sqlCmd = new SqlCommand(sql, sqlConnection))
             {
                 using (SqlDataReader reader = sqlCmd.ExecuteReader())
@@ -35,11 +34,12 @@ namespace SQLHandling
                         Customer customer = new Customer();
                         customer.CustomerId = Convert.ToInt32(reader["CustomerID"]);
                         customer.CustomerFirstName = reader["CustomerFirstName"].ToString();
-                        customer.CustomerLastName = reader["CustomerSurname"].ToString();
+                        customer.CustomerLastName = reader["CustomerSurName"].ToString();
                         CustomerList.Add(customer);
                     }
                 }
             }
+
             Dispose();
 
             return CustomerList;
