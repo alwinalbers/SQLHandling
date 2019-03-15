@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Serilog;
+using System.Data;
 
 namespace SQLHandling
 {
@@ -13,25 +14,14 @@ namespace SQLHandling
         static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
-            List<Customer> custumers = new List<Customer>();
             string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SandboxDB";
 
-            
             using (ISqlConnectionManager dbManager = new SandBoxDbManager(connectionString))
             {
-                dbManager.Connect();
-                if (dbManager.isConnected)
-                {
-                    custumers = dbManager.ReadAllCustomer();
-                }
+                dbManager.Logik();
             }
 
-            foreach (var customer in custumers)
-            {
-                Console.WriteLine(customer.CustomerId + " " +customer.CustomerFirstName + " " + customer.CustomerLastName);
-            }
             Console.ReadLine();
-
             Log.CloseAndFlush();
         }
     }
